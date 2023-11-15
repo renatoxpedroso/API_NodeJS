@@ -1,7 +1,7 @@
-import Fastify from "fastify";
-import { routes } from "./routes";
+import Fastify, { fastify } from "fastify";
+import { customer  } from "../routes/customer/customer";
 import cors from "@fastify/cors";
-
+const fastify = require('fastify')({ logger: true })
 const app = Fastify({ logger: true });
 
 app.setErrorHandler((error, request, reply) => {
@@ -10,10 +10,10 @@ app.setErrorHandler((error, request, reply) => {
 
 const start = async () => {
     await app.register(cors);
-    await app.register(routes);
+    await app.register(customer);
 
     try {
-        await app.listen({ port: 3333 });
+        await app.listen({ port: 3000 });
     } catch (err) {
         process.exit(1);
     }
